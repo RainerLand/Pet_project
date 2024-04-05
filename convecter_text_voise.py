@@ -11,7 +11,7 @@ def pdf_to_mp3(file_path='test.pdf', language='en'):
         print(f"[+][+][+] Processing...")
         
         with pdfplumber.PDF(open(file=file_path, mode='rb')) as pdf:
-            pages = [pages.extract_text() for page in pdf.pages]
+            pages = [page.extract_text() for page in pdf.pages]
             
         text = ''.join(pages) 
         text = text.replace('\n', '')  
@@ -24,7 +24,7 @@ def pdf_to_mp3(file_path='test.pdf', language='en'):
     else:
         return "File not exists, check the file path!"
 def main():
-    tprint('PDF>>TO>>MP3', font='bulbhead')
+    tprint('PDF>>TO>>MP3')
     file_path = input("\nEnter a file's path: ")
     language = input("Choose language, for example 'en' or 'ru': ")
     print(pdf_to_mp3(file_path=file_path, language=language))  
