@@ -19,7 +19,7 @@ def pdf_to_mp3(file_path='test.pdf', language='en'):
         my_audio = gTTS(text=text, lang=language, slow=False)
         file_name = Path(file_path).stem
         my_audio.save(f'{file_name}.mp3')
-        
+
         return f'[+] {file_name}.mp3 saved successfully!\n +++ Have a good day! +++'
     else:
         return "File not exists, check the file path!"
