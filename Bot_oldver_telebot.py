@@ -11,12 +11,12 @@ def start(message):
     mess = f'Привет, <b>{message.from_user.first_name}</b>, я могу подсказать тебе погоду в твоем городе. Введи название!'
     bot.send_message(message.chat.id, mess , parse_mode='html')
     
-# обрабатываем любой текстовый запрос
+#  любой текстовый запрос
 @bot.message_handler(content_types=['text'])
 def weather(message):
-    # получаем город из сообщения пользователя
+    # п город из сообщения пользователя
   city = message.text
-  # формируем запрос
+  # запрос
   url = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&units=metric&lang=ru&appid=79d1ca96933b0328e1c7e3e7a26cb347'
   # отправляем запрос на сервер и сразу получаем результат
   weather_data = requests.get(url).json()
@@ -24,13 +24,13 @@ def weather(message):
   # получаем данные о температуре и о том, как она ощущается
   temperature = round(weather_data['main']['temp'])
   temperature_feels = round(weather_data['main']['feels_like'])
-  # формируем ответы
+  #  ответы
   w_now = 'Сейчас в городе ' + city + ' ' + str(temperature) + ' °C'
   w_feels = 'Ощущается как ' + str(temperature_feels) + ' °C'
   # отправляем значения пользователю
   bot.send_message(message.from_user.id, w_now)
   bot.send_message(message.from_user.id, w_feels)
-  # сообщаем про ветреную погоду
+  #  ветреная погоду
   wind_speed = round(weather_data['wind']['speed'])
   if wind_speed < 5:
       bot.send_message(message.from_user.id, '✅ Погода хорошая, ветра почти нет')
@@ -41,13 +41,13 @@ def weather(message):
   else:
       bot.send_message(message.from_user.id, '❌ На улице шторм, на улицу лучше не выходить')  
 
-# запускаем бота
+# запуск бота
 if __name__ == '__main__':
     while True:
-        # в бесконечном цикле постоянно опрашиваем бота — есть ли новые сообщения
+        # цикл опроса новых сообщений
         try:
             bot.polling(none_stop=True, interval=0)
-        # если возникла ошибка — сообщаем про исключение и продолжаем работу
+        # если возникла ошибка , без остановки работы
         except Exception as e: 
             print('❌❌❌❌❌ Сработало исключение! ❌❌❌❌❌')
 
