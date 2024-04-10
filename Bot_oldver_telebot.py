@@ -30,7 +30,7 @@ def weather(message):
   # отправляем значения пользователю
   bot.send_message(message.from_user.id, w_now)
   bot.send_message(message.from_user.id, w_feels)
-  #  ветреная погоду
+  #  ветреная погодa
   wind_speed = round(weather_data['wind']['speed'])
   if wind_speed < 5:
       bot.send_message(message.from_user.id, '✅ Погода хорошая, ветра почти нет')
